@@ -529,7 +529,7 @@ var µ = function() {
                 projection: "orthographic",
                 orientation: "",
                 topology: TOPOLOGY,
-                overlayType: "default",
+                overlayType: "off",
                 showGridPoints: false
             };
             coalesce(tokens[9], "").split("/").forEach(function(segment) {

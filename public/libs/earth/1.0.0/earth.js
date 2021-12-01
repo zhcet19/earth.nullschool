@@ -1032,7 +1032,7 @@
         // Add handlers for mode buttons.
         d3.select("#wind-mode-enable").on("click", function() {
             if (configuration.get("param") !== "wind") {
-                configuration.save({param: "wind", surface: "surface", level: "level", overlayType: "default"});
+                configuration.save({param: "wind", surface: "surface", level: "level", overlayType: "off"});
             }
         });
         configuration.on("change:param", function(x, param) {
@@ -1043,7 +1043,7 @@
                 // When switching between modes, there may be no associated data for the current date. So we need
                 // find the closest available according to the catalog. This is not necessary if date is "current".
                 // UNDONE: this code is annoying. should be easier to get date for closest ocean product.
-                var ocean = {param: "ocean", surface: "surface", level: "currents", overlayType: "default"};
+                var ocean = {param: "ocean", surface: "surface", level: "currents", overlayType: "off"};
                 var attr = _.clone(configuration.attributes);
                 if (attr.date === "current") {
                     configuration.save(ocean);
@@ -1081,7 +1081,7 @@
         d3.select("#option-show-grid").on("click", function() {
             configuration.save({showGridPoints: !configuration.get("showGridPoints")});
         });
-        configuration.on("change:showGridPoints", function(x, showGridPoints) {
+        configuration.on("change:showGridPointFs", function(x, showGridPoints) {
             d3.select("#option-show-grid").classed("highlighted", showGridPoints);
         });
 
@@ -1093,14 +1093,15 @@
 
         // Add handlers for ocean animation types.
         bindButtonToConfiguration("#animate-currents", {param: "ocean", surface: "surface", level: "currents"});
-
+        bindButtonToConfiguration("#animate-wind", {param: "wind"});
+        bindButtonToConfiguration("#animate-wave", {param: "wind"});
         // Add handlers for all overlay buttons.
         products.overlayTypes.forEach(function(type) {
             bindButtonToConfiguration("#overlay-" + type, {overlayType: type});
         });
-        bindButtonToConfiguration("#overlay-wind", {param: "wind", overlayType: "default"});
+       // bindButtonToConfiguration("#overlay-wind", {param: "wind", overlayType: "default"});
         bindButtonToConfiguration("#overlay-ocean-off", {overlayType: "off"});
-        bindButtonToConfiguration("#overlay-currents", {overlayType: "default"});
+       // bindButtonToConfiguration("#overlay-currents", {overlayType: "default"});
 
         // Add handlers for all projection buttons.
         globes.keys().forEach(function(p) {

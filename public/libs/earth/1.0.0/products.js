@@ -110,7 +110,7 @@ var products = function() {
     var FACTORIES = {
 
         "wind": {
-            matches: _.matches({param: "wind"}),
+            matches: _.matches({param: "wind",overlayType: "off"}),
             create: function(attr) {
                 return buildProduct({
                     field: "vector",
@@ -147,7 +147,7 @@ var products = function() {
                 });
             }
         },
-
+/* 
         "temp": {
             matches: _.matches({param: "wind", overlayType: "temp"}),
             create: function(attr) {
@@ -443,7 +443,7 @@ var products = function() {
                 });
             }
         },
-
+ */
         "currents": {
             matches: _.matches({param: "ocean", surface: "surface", level: "currents"}),
             create: function(attr) {
