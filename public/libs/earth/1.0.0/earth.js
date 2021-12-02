@@ -1043,7 +1043,7 @@
                 // When switching between modes, there may be no associated data for the current date. So we need
                 // find the closest available according to the catalog. This is not necessary if date is "current".
                 // UNDONE: this code is annoying. should be easier to get date for closest ocean product.
-                var ocean = {param: "ocean", surface: "surface", level: "currents", overlayType: "off"};
+                var ocean = {param: "ocean", surface: "surface", level: "currents", overlayType: "default"};
                 var attr = _.clone(configuration.attributes);
                 if (attr.date === "current") {
                     configuration.save(ocean);
@@ -1092,9 +1092,15 @@
         });
 
         // Add handlers for ocean animation types.
-        bindButtonToConfiguration("#animate-currents", {param: "ocean", surface: "surface", level: "currents"});
-        bindButtonToConfiguration("#animate-wind", {param: "wind"});
-        bindButtonToConfiguration("#animate-wave", {param: "wind"});
+        bindButtonToConfiguration("#animate-currents", {param: "ocean", surface: "surface", level: "currents",overlayType:"off"});
+        bindButtonToConfiguration("#animate-wind", {param: "wind", surface: "surface", level: "level"});
+
+        bindButtonToConfiguration("#animate-currents-back", {param: "ocean", surface: "surface", level: "currents"});
+        bindButtonToConfiguration("#animate-wind-back", {param: "wind", surface: "surface", level: "level", overlayType: "off"});
+
+
+
+        
         // Add handlers for all overlay buttons.
         products.overlayTypes.forEach(function(type) {
             bindButtonToConfiguration("#overlay-" + type, {overlayType: type});

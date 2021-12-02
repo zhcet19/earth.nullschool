@@ -110,7 +110,7 @@ var products = function() {
     var FACTORIES = {
 
         "wind": {
-            matches: _.matches({param: "wind",overlayType: "off"}),
+            matches: _.matches({param: "wind", surface: "surface", level: "level", overlayType: "off"}),
             create: function(attr) {
                 return buildProduct({
                     field: "vector",
